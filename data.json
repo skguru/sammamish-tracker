@@ -1,0 +1,37 @@
+{
+  "updated_at": "April 2025 (seed — will update automatically every Monday)",
+  "zip": "98075",
+  "city": "Sammamish, WA",
+  "median_price": 1520000,
+  "yoy_pct": 5.2,
+  "months_inventory": 1.4,
+  "avg_dom": 9,
+  "list_to_sale": 103.1,
+  "pct_sold_above_list": 67.8,
+  "new_listings": 42,
+  "monthly_prices": [
+    {"month": "Apr '24", "price": 1390000},
+    {"month": "May '24", "price": 1455000},
+    {"month": "Jun '24", "price": 1530000},
+    {"month": "Jul '24", "price": 1550000},
+    {"month": "Aug '24", "price": 1520000},
+    {"month": "Sep '24", "price": 1480000},
+    {"month": "Oct '24", "price": 1445000},
+    {"month": "Nov '24", "price": 1410000},
+    {"month": "Dec '24", "price": 1395000},
+    {"month": "Jan '25", "price": 1415000},
+    {"month": "Feb '25", "price": 1470000},
+    {"month": "Mar '25", "price": 1520000}
+  ],
+  "seasonal_scores": {
+    "spring": {"score": 2, "label": "Seller market",        "note": "Peak competition, bidding wars"},
+    "summer": {"score": 3, "label": "Seller market",        "note": "Still very competitive"},
+    "fall":   {"score": 7, "label": "Balanced / buyer-lean","note": "Less competition, price cuts possible"},
+    "winter": {"score": 8, "label": "Buyer-friendly",       "note": "Motivated sellers, low demand"}
+  },
+  "fall_2026_score": 7,
+  "spring_2026_score": 2,
+  "recommended_season": "fall",
+  "data_source": "Zillow Research public CSVs — zillow.com/research/data",
+  "criteria": "4BR · 2,400–3,200 sqft · Zip 98075 · Skyline HS area"
+}
