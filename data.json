@@ -2,7 +2,7 @@
   "updated_at": "April 10, 2026",
   "zip": "98075",
   "city": "Sammamish, WA",
-  "home_type": "Single Family Residential",
+  "home_type": "Single Family + Condo (Sammamish city-level)",
   "price_range": "$1.25M \u2013 $2.0M",
   "median_price": null,
   "yoy_pct": null,
@@ -30,7 +30,7 @@
     },
     "fall": {
       "score": 6,
-      "label": "Balanced/buyer-lean",
+      "label": "Balanced / buyer-lean",
       "note": "Less competition"
     },
     "winter": {
@@ -42,6 +42,6 @@
   "fall_2026_score": 6,
   "spring_2026_score": 3,
   "recommended_season": "fall",
-  "data_source": "Zillow Research \u2014 Single Family Residential \u2014 Zip 98075",
-  "criteria": "4BR \u00b7 2,400\u20133,200 sqft \u00b7 SFR only \u00b7 $1.25M\u20132.0M \u00b7 Skyline HS"
+  "data_source": "Zillow Research \u2014 City-level \u2014 Sammamish WA",
+  "criteria": "4BR \u00b7 2,400\u20133,200 sqft \u00b7 $1.25M\u20132.0M \u00b7 Skyline HS \u00b7 Zip 98075"
 }
