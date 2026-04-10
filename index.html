@@ -1,373 +1,268 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sammamish Market Tracker — Skyline HS</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Playfair+Display:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Sammamish SFR Market Tracker — Skyline HS</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Playfair+Display:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ink:#1a1f2e;--ink2:#4a5068;--ink3:#8890a8;
+  --bg:#f4f5fa;--card:#fff;--border:#e2e5f0;
+  --amber:#c8790a;--amber-bg:#fef3e2;--amber-bd:#f0c040;
+  --green:#1a7a4a;--green-bg:#e8f7ef;--green-bd:#7fccaa;
+  --red:#b83232;--red-bg:#fdf0f0;--red-bd:#f0a0a0;
+  --blue:#1e55a0;--blue-bg:#eef3fb;--blue-bd:#a0bce8;
+  --purple:#5b3fa0;--purple-bg:#f0ecfb;
+}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);min-height:100vh}
+.page{max-width:900px;margin:0 auto;padding:32px 20px 60px}
 
-    :root {
-      --ink:    #1a1f2e;
-      --ink2:   #4a5068;
-      --ink3:   #8890a8;
-      --bg:     #f4f5fa;
-      --card:   #ffffff;
-      --border: #e2e5f0;
-      --amber:  #c8790a;
-      --amber-bg: #fef3e2;
-      --amber-bd: #f0c040;
-      --green:  #1a7a4a;
-      --green-bg: #e8f7ef;
-      --green-bd: #7fccaa;
-      --red:    #b83232;
-      --red-bg: #fdf0f0;
-      --red-bd: #f0a0a0;
-      --blue:   #1e55a0;
-      --blue-bg:#eef3fb;
-    }
+.page-header{margin-bottom:24px}
+.page-header h1{font-family:'Playfair Display',serif;font-size:clamp(21px,4vw,29px);font-weight:500;line-height:1.2}
+.sub{font-size:12px;color:var(--ink3);font-family:'DM Mono',monospace;margin-top:4px}
+.pills{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.pill{font-size:11px;font-family:'DM Mono',monospace;padding:3px 11px;border-radius:20px;border:0.5px solid}
+.pill-amber{background:var(--amber-bg);border-color:var(--amber-bd);color:var(--amber)}
+.pill-gray{background:var(--bg);border-color:var(--border);color:var(--ink3)}
+.pill-green{background:var(--green-bg);border-color:var(--green-bd);color:var(--green)}
 
-    body {
-      font-family: 'DM Sans', sans-serif;
-      background: var(--bg);
-      color: var(--ink);
-      min-height: 100vh;
-    }
+.sec{font-size:10px;font-family:'DM Mono',monospace;color:var(--ink3);text-transform:uppercase;letter-spacing:.07em;margin:24px 0 10px}
 
-    /* ── Layout ── */
-    .page { max-width: 860px; margin: 0 auto; padding: 32px 20px 60px; }
+.rec-banner{background:var(--green-bg);border:1.5px solid var(--green-bd);border-radius:14px;padding:18px 22px;display:flex;align-items:flex-start;gap:14px;margin-bottom:20px}
+.rec-icon{font-size:24px;flex-shrink:0;margin-top:2px}
+.rec-lbl{font-size:10px;font-family:'DM Mono',monospace;color:var(--green);text-transform:uppercase;letter-spacing:.07em;margin-bottom:3px}
+.rec-title{font-size:16px;font-weight:500;color:var(--green);margin-bottom:6px}
+.rec-body{font-size:13px;color:var(--ink2);line-height:1.7}
 
-    /* ── Header ── */
-    .page-header { margin-bottom: 28px; }
-    .page-header h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(22px, 4vw, 30px);
-      font-weight: 500;
-      color: var(--ink);
-      line-height: 1.2;
-    }
-    .page-header .sub {
-      font-size: 13px;
-      color: var(--ink3);
-      font-family: 'DM Mono', monospace;
-      margin-top: 5px;
-    }
-    .criteria-row { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 14px; }
-    .pill {
-      background: var(--amber-bg);
-      border: 0.5px solid var(--amber-bd);
-      color: var(--amber);
-      font-size: 11px;
-      font-family: 'DM Mono', monospace;
-      padding: 4px 12px;
-      border-radius: 20px;
-    }
-    .pill.updated {
-      background: var(--bg);
-      border-color: var(--border);
-      color: var(--ink3);
-    }
+.metrics-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-bottom:4px}
+.mc{background:var(--card);border:0.5px solid var(--border);border-radius:10px;padding:13px 15px}
+.mc-lbl{font-size:10px;color:var(--ink3);font-family:'DM Mono',monospace;text-transform:uppercase;letter-spacing:.05em;margin-bottom:5px}
+.mc-val{font-size:20px;font-weight:500;line-height:1}
+.mc-delta{font-size:11px;margin-top:4px;font-family:'DM Mono',monospace}
+.up{color:var(--red)}.dn{color:var(--green)}.neu{color:var(--ink3)}
 
-    /* ── Recommendation banner ── */
-    .rec-banner {
-      background: var(--green-bg);
-      border: 1.5px solid var(--green-bd);
-      border-radius: 14px;
-      padding: 18px 22px;
-      display: flex;
-      align-items: flex-start;
-      gap: 16px;
-      margin-bottom: 24px;
-    }
-    .rec-icon { font-size: 26px; flex-shrink: 0; margin-top: 2px; }
-    .rec-label {
-      font-size: 10px;
-      font-family: 'DM Mono', monospace;
-      color: var(--green);
-      text-transform: uppercase;
-      letter-spacing: .07em;
-      margin-bottom: 4px;
-    }
-    .rec-title { font-size: 17px; font-weight: 500; color: var(--green); margin-bottom: 7px; }
-    .rec-body  { font-size: 13px; color: var(--ink2); line-height: 1.7; }
+.card{background:var(--card);border:0.5px solid var(--border);border-radius:14px;padding:18px 20px;margin-bottom:14px}
+.card.winner{border:1.5px solid var(--green-bd)}
+.card-title{font-size:14px;font-weight:500;margin-bottom:2px}
+.card-sub{font-size:11px;color:var(--ink3);font-family:'DM Mono',monospace;margin-bottom:14px}
 
-    /* ── Section heading ── */
-    .section-heading {
-      font-size: 11px;
-      font-family: 'DM Mono', monospace;
-      color: var(--ink3);
-      text-transform: uppercase;
-      letter-spacing: .07em;
-      margin-bottom: 12px;
-      margin-top: 28px;
-    }
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
+@media(max-width:560px){.two-col{grid-template-columns:1fr}}
 
-    /* ── Metric cards ── */
-    .metrics-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-      gap: 12px;
-      margin-bottom: 24px;
-    }
-    .mc {
-      background: var(--card);
-      border: 0.5px solid var(--border);
-      border-radius: 10px;
-      padding: 14px 16px;
-    }
-    .mc-label {
-      font-size: 10px;
-      color: var(--ink3);
-      font-family: 'DM Mono', monospace;
-      text-transform: uppercase;
-      letter-spacing: .05em;
-      margin-bottom: 6px;
-    }
-    .mc-val { font-size: 22px; font-weight: 500; line-height: 1; }
-    .mc-delta { font-size: 11px; margin-top: 5px; font-family: 'DM Mono', monospace; }
-    .up  { color: var(--red); }
-    .dn  { color: var(--green); }
-    .neu { color: var(--ink3); }
+/* prediction highlight box */
+.pred-box{border-radius:10px;padding:14px 16px;margin-bottom:14px;display:flex;align-items:flex-start;gap:12px}
+.pred-box.up-pred{background:var(--red-bg);border:0.5px solid var(--red-bd)}
+.pred-box.dn-pred{background:var(--green-bg);border:0.5px solid var(--green-bd)}
+.pred-box.neu-pred{background:var(--amber-bg);border:0.5px solid var(--amber-bd)}
+.pred-icon{font-size:20px;flex-shrink:0;margin-top:2px}
+.pred-body{font-size:13px;line-height:1.65}
+.pred-price{font-family:'DM Mono',monospace;font-size:18px;font-weight:500;margin:4px 0}
 
-    /* ── Cards ── */
-    .card {
-      background: var(--card);
-      border: 0.5px solid var(--border);
-      border-radius: 14px;
-      padding: 20px 22px;
-      margin-bottom: 16px;
-    }
-    .card-title { font-size: 14px; font-weight: 500; margin-bottom: 3px; }
-    .card-sub   { font-size: 11px; color: var(--ink3); font-family: 'DM Mono', monospace; margin-bottom: 16px; }
+/* seasonal */
+.seasonal-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.sc{padding:10px 8px;border-radius:8px;text-align:center;position:relative}
+.sc.rec-sc{border:1.5px solid var(--green-bd)}
+.sc-tag{position:absolute;top:-8px;left:50%;transform:translateX(-50%);background:var(--green);color:#fff;font-size:9px;font-family:'DM Mono',monospace;padding:2px 8px;border-radius:20px;white-space:nowrap}
+.sc-name{font-size:12px;font-weight:500;margin-bottom:2px}
+.sc-num{font-family:'DM Mono',monospace;font-size:20px;font-weight:500;line-height:1}
+.sc-note{font-size:10px;margin-top:2px;opacity:.8}
+.s-hot{background:#fdf0f0;color:var(--red)}
+.s-warm{background:#fff8ec;color:var(--amber)}
+.s-cool{background:#eef3fb;color:var(--blue)}
+.s-cold{background:#e8f7ef;color:var(--green)}
 
-    /* ── Two-col ── */
-    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
-    @media (max-width: 580px) { .two-col { grid-template-columns: 1fr; } }
+/* compare */
+.compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px}
+@media(max-width:520px){.compare-grid{grid-template-columns:1fr}}
+.season-card{background:var(--card);border:0.5px solid var(--border);border-radius:14px;padding:18px 16px;position:relative}
+.season-card.winner-card{border:1.5px solid var(--green-bd)}
+.winner-badge{position:absolute;top:-10px;left:50%;transform:translateX(-50%);background:var(--green);color:#fff;font-size:10px;font-family:'DM Mono',monospace;padding:3px 12px;border-radius:20px;white-space:nowrap}
+.sc-season{font-size:10px;font-family:'DM Mono',monospace;color:var(--ink3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:3px}
+.sc-name2{font-size:15px;font-weight:500;margin-bottom:12px}
+.sc-score-row{display:flex;align-items:baseline;gap:7px;margin-bottom:5px}
+.sc-big{font-family:'DM Mono',monospace;font-size:36px;font-weight:500;line-height:1}
+.bar-wrap{height:7px;background:var(--border);border-radius:4px;overflow:hidden;margin-bottom:12px}
+.bar{height:100%;border-radius:4px;transition:width .6s ease}
+.factor-list{list-style:none;display:flex;flex-direction:column;gap:7px}
+.factor{display:flex;align-items:flex-start;gap:7px;font-size:12px;color:var(--ink2);line-height:1.4}
+.fi{width:16px;height:16px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:10px;flex-shrink:0;font-weight:500}
+.fi-g{background:var(--green-bg);color:var(--green)}
+.fi-b{background:var(--red-bg);color:var(--red)}
+.fi-n{background:var(--bg);color:var(--ink3)}
 
-    /* ── Seasonal grid ── */
-    .seasonal-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 12px; }
-    .sc {
-      padding: 12px 10px;
-      border-radius: 10px;
-      text-align: center;
-      position: relative;
-    }
-    .sc.active-rec { border: 1.5px solid var(--green-bd); }
-    .sc-rec-tag {
-      position: absolute;
-      top: -9px; left: 50%; transform: translateX(-50%);
-      background: var(--green); color: #fff;
-      font-size: 9px; font-family: 'DM Mono', monospace;
-      padding: 2px 8px; border-radius: 20px; white-space: nowrap;
-    }
-    .sc-name  { font-size: 12px; font-weight: 500; margin-bottom: 2px; }
-    .sc-score { font-family: 'DM Mono', monospace; font-size: 22px; font-weight: 500; line-height: 1; }
-    .sc-note  { font-size: 10px; margin-top: 3px; opacity: .8; }
-    .s-hot  { background: #fdf0f0; color: var(--red); }
-    .s-warm { background: #fff8ec; color: var(--amber); }
-    .s-cool { background: #eef3fb; color: var(--blue); }
-    .s-cold { background: #e8f7ef; color: var(--green); }
+/* timeline */
+.timeline{display:flex;flex-direction:column}
+.tl-item{display:flex;gap:14px}
+.tl-left{display:flex;flex-direction:column;align-items:center;width:40px;flex-shrink:0}
+.tl-dot{width:11px;height:11px;border-radius:50%;background:var(--amber);flex-shrink:0;margin-top:3px}
+.tl-dot.go{background:var(--green)}
+.tl-line{flex:1;width:2px;background:var(--border);margin-top:3px;min-height:20px}
+.tl-item:last-child .tl-line{display:none}
+.tl-right{padding-bottom:20px;flex:1}
+.tl-when{font-size:11px;font-family:'DM Mono',monospace;color:var(--ink3);margin-bottom:2px}
+.tl-what{font-size:13px;color:var(--ink2);line-height:1.6}
+.tl-what strong{color:var(--ink);font-weight:500}
 
-    /* ── Score display ── */
-    .score-big { font-family: 'DM Mono', monospace; font-size: 40px; font-weight: 500; line-height: 1; }
-    .score-label { font-size: 12px; color: var(--ink3); margin-top: 4px; }
-    .bar-wrap { height: 8px; background: var(--border); border-radius: 4px; overflow: hidden; margin: 10px 0 12px; }
-    .bar { height: 100%; border-radius: 4px; transition: width .7s ease; }
+.legend-row{display:flex;flex-wrap:wrap;gap:14px;margin-top:10px;font-size:11px;color:var(--ink3);font-family:'DM Mono',monospace}
+.leg{display:flex;align-items:center;gap:5px}
+.leg-line{width:18px;height:3px;border-radius:2px}
+.leg-dash{width:18px;height:3px;border-radius:2px;background:repeating-linear-gradient(90deg,#5b3fa0 0,#5b3fa0 4px,transparent 4px,transparent 7px)}
+.leg-box{width:10px;height:10px;border-radius:2px}
 
-    /* ── Compare cards ── */
-    .compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px; }
-    @media (max-width: 520px) { .compare-grid { grid-template-columns: 1fr; } }
-    .season-card {
-      background: var(--card);
-      border: 0.5px solid var(--border);
-      border-radius: 14px;
-      padding: 20px 18px;
-      position: relative;
-    }
-    .season-card.winner { border: 1.5px solid var(--green-bd); }
-    .winner-badge {
-      position: absolute;
-      top: -11px; left: 50%; transform: translateX(-50%);
-      background: var(--green); color: #fff;
-      font-size: 10px; font-family: 'DM Mono', monospace;
-      padding: 3px 14px; border-radius: 20px; white-space: nowrap;
-    }
-    .sc-season { font-size: 10px; font-family: 'DM Mono', monospace; color: var(--ink3); text-transform: uppercase; letter-spacing: .06em; margin-bottom: 4px; }
-    .sc-name2  { font-size: 16px; font-weight: 500; margin-bottom: 14px; }
-    .sc-score-row { display: flex; align-items: baseline; gap: 8px; margin-bottom: 6px; }
-    .sc-score2 { font-family: 'DM Mono', monospace; font-size: 38px; font-weight: 500; line-height: 1; }
-    .factor-list { list-style: none; display: flex; flex-direction: column; gap: 8px; margin-top: 4px; }
-    .factor { display: flex; align-items: flex-start; gap: 8px; font-size: 12px; color: var(--ink2); line-height: 1.45; }
-    .fi {
-      width: 18px; height: 18px; border-radius: 5px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 11px; flex-shrink: 0; margin-top: 0px;
-      font-weight: 500;
-    }
-    .fi-good { background: var(--green-bg); color: var(--green); }
-    .fi-bad  { background: var(--red-bg);   color: var(--red);   }
-    .fi-neu  { background: var(--bg);        color: var(--ink3);  }
+.footer{font-size:11px;color:var(--ink3);font-family:'DM Mono',monospace;background:var(--card);border:0.5px solid var(--border);border-radius:10px;padding:12px 16px;line-height:1.7;margin-top:8px}
+.footer a{color:var(--blue)}
 
-    /* ── Timeline / Action plan ── */
-    .timeline { display: flex; flex-direction: column; gap: 0; }
-    .tl-item { display: flex; gap: 16px; }
-    .tl-left { display: flex; flex-direction: column; align-items: center; width: 44px; flex-shrink: 0; }
-    .tl-dot {
-      width: 12px; height: 12px; border-radius: 50%;
-      background: var(--amber); border: 2px solid var(--amber-bg);
-      flex-shrink: 0; margin-top: 3px;
-    }
-    .tl-dot.future { background: var(--green); border-color: var(--green-bg); }
-    .tl-line { flex: 1; width: 2px; background: var(--border); margin-top: 4px; min-height: 24px; }
-    .tl-item:last-child .tl-line { display: none; }
-    .tl-right { padding-bottom: 22px; flex: 1; }
-    .tl-when { font-size: 11px; font-family: 'DM Mono', monospace; color: var(--ink3); margin-bottom: 3px; }
-    .tl-what { font-size: 13px; color: var(--ink2); line-height: 1.6; }
-    .tl-what strong { color: var(--ink); font-weight: 500; }
-
-    /* ── Chart legend ── */
-    .legend-row { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 10px; font-size: 11px; color: var(--ink3); font-family: 'DM Mono', monospace; }
-    .leg { display: flex; align-items: center; gap: 5px; }
-    .leg-dot { width: 12px; height: 3px; border-radius: 2px; }
-    .leg-box { width: 10px; height: 10px; border-radius: 2px; }
-
-    /* ── Footer ── */
-    .footer {
-      font-size: 11px;
-      color: var(--ink3);
-      font-family: 'DM Mono', monospace;
-      background: var(--card);
-      border: 0.5px solid var(--border);
-      border-radius: 10px;
-      padding: 12px 16px;
-      line-height: 1.7;
-      margin-top: 8px;
-    }
-    .footer a { color: var(--blue); }
-
-    /* ── Loading / error ── */
-    #loading { text-align: center; padding: 80px 20px; font-size: 14px; color: var(--ink3); font-family: 'DM Mono', monospace; }
-    #error-msg { background: var(--red-bg); border: 0.5px solid var(--red-bd); border-radius: 10px; padding: 14px 18px; font-size: 13px; color: var(--red); margin-bottom: 16px; display: none; }
-  </style>
+#loading{text-align:center;padding:80px 20px;font-size:14px;color:var(--ink3);font-family:'DM Mono',monospace}
+.err{background:var(--red-bg);border:0.5px solid var(--red-bd);border-radius:10px;padding:14px;font-size:13px;color:var(--red);margin-bottom:12px;display:none}
+</style>
 </head>
 <body>
 <div class="page">
   <div id="loading">Loading market data…</div>
-  <div id="error-msg"></div>
+  <div class="err" id="errBox"></div>
   <div id="app" style="display:none"></div>
 </div>
-
 <script>
-function fmtM(n) {
-  if (!n) return '–';
-  return n >= 1e6 ? '$' + (n / 1e6).toFixed(2) + 'M' : '$' + Math.round(n / 1000) + 'K';
-}
-function fmt(n) { return '$' + Math.round(n / 1000) + 'K'; }
-function scoreColor(s) {
-  return s >= 7 ? 'var(--green)' : s >= 5 ? 'var(--amber)' : 'var(--red)';
-}
-function sClass(s) {
-  return s >= 7 ? 's-cold' : s >= 5 ? 's-cool' : s >= 3 ? 's-warm' : 's-hot';
-}
+function fmtM(n){if(!n)return'–';return n>=1e6?'$'+(n/1e6).toFixed(2)+'M':'$'+Math.round(n/1000)+'K';}
+function fmt(n){return'$'+Math.round(n/1000)+'K';}
+function scoreColor(s){return s>=7?'#1a7a4a':s>=5?'#c8790a':'#b83232';}
+function sClass(s){return s>=7?'s-cold':s>=5?'s-cool':s>=3?'s-warm':'s-hot';}
 
 let priceChart;
 
-function render(d) {
-  const rec = d.recommended_season || 'fall';
-  const ss  = d.seasonal_scores || {};
+function render(d){
+  const rec   = d.recommended_season||'fall';
+  const ss    = d.seasonal_scores||{};
+  const fp    = d.price_with_forecast||[];
+  const fall_pred   = d.fall_2026_predicted_price;
+  const spring_pred = d.spring_2026_predicted_price;
+  const fall_delta  = d.fall_price_delta_pct;
 
-  const recTitle = rec === 'fall'
-    ? 'Buy in Fall 2026 — September through November'
-    : 'Buy in Spring 2026 — March through May';
+  // Prediction banner
+  let predClass='neu-pred', predIcon='📊';
+  let predMsg='';
+  if(fall_delta!==null && fall_delta!==undefined){
+    if(fall_delta < -1){
+      predClass='dn-pred'; predIcon='📉';
+      predMsg=`Prices are forecast to be <strong>${Math.abs(fall_delta)}% lower</strong> in Fall 2026 than today — a good sign for buyers. If you wait for fall, the model suggests you may save roughly ${fmtM(d.median_price - fall_pred)} off today's median.`;
+    } else if(fall_delta > 3){
+      predClass='up-pred'; predIcon='📈';
+      predMsg=`Prices are forecast to be <strong>${fall_delta}% higher</strong> in Fall 2026 vs today. Even so, Fall is still the right season — you'd pay less than in Spring 2026 due to lower competition and fewer bidding wars.`;
+    } else {
+      predClass='neu-pred'; predIcon='〰️';
+      predMsg=`Prices are forecast to be roughly <strong>flat</strong> in Fall 2026 vs today (${fall_delta>0?'+':''}${fall_delta}%). The timing advantage of fall comes from less competition and negotiating room, not necessarily a lower sticker price.`;
+    }
+  }
 
-  const recBody = rec === 'fall'
-    ? `Fall is the most buyer-friendly season in Sammamish. Fewer competing offers, sellers motivated to close before year-end, and you can keep contingencies. Homes that sat unsold since summer often see price reductions by mid-October. You avoid the spring bidding war tax — typically 3–5% over asking — which on a $${(d.median_price/1e6).toFixed(1)}M home is real money.`
-    : `Spring is giving buyers a better window this cycle than usual. Inventory is higher than recent years and competition has eased. You'll have more homes to choose from and better selection for your 4BR criteria — just be prepared to move quickly on well-priced listings.`;
-
-  const fallCard = buildSeasonCard('fall', 'Fall 2026 — Sep to Nov', d.fall_2026_score, ss.fall, rec === 'fall', [
-    { t: 'good', v: 'Fewer competing offers — often 0–1' },
-    { t: 'good', v: 'Homes sitting since summer may cut price' },
-    { t: 'good', v: 'Inspection & financing contingencies accepted' },
-    { t: 'good', v: 'Sellers motivated to close before year-end' },
-    { t: 'bad',  v: 'Less inventory — fewer homes to choose from' },
-    { t: 'neu',  v: 'Rate outlook uncertain — watch Fed signals' }
-  ]);
-
-  const springCard = buildSeasonCard('spring', 'Spring 2026 — Mar to May', d.spring_2026_score, ss.spring, rec === 'spring', [
-    { t: 'good', v: 'Most listings hit the market — best selection' },
-    { t: 'good', v: 'Easier to compare homes side by side' },
-    { t: 'bad',  v: 'Bidding wars on nearly every desirable home' },
-    { t: 'bad',  v: 'Expect 3–6% over asking price' },
-    { t: 'bad',  v: 'Waived contingencies become the norm' },
-    { t: 'neu',  v: 'Faster closes due to competition pressure' }
-  ]);
-
-  const app = document.getElementById('app');
-  app.innerHTML = `
+  const app=document.getElementById('app');
+  app.innerHTML=`
     <div class="page-header">
-      <h1>Sammamish Market Tracker</h1>
-      <div class="sub">Skyline HS district · Zip 98075 · Live Zillow data</div>
-      <div class="criteria-row">
-        <span class="pill">4 bed</span>
-        <span class="pill">2+ bath</span>
-        <span class="pill">2,400–3,200 sqft</span>
-        <span class="pill">Sammamish WA</span>
-        <span class="pill updated">Updated: ${d.updated_at}</span>
+      <h1>Sammamish SFR Market Tracker</h1>
+      <div class="sub">Skyline HS zone · Zip 98075 · Single Family Residential · Auto-updated weekly</div>
+      <div class="pills">
+        <span class="pill pill-amber">4 bed</span>
+        <span class="pill pill-amber">2+ bath</span>
+        <span class="pill pill-amber">2,400–3,200 sqft</span>
+        <span class="pill pill-amber">$1.25M–$2.0M</span>
+        <span class="pill pill-amber">SFR only</span>
+        <span class="pill pill-gray">Updated: ${d.updated_at}</span>
+        ${d.home_type?`<span class="pill pill-green">${d.home_type}</span>`:''}
       </div>
     </div>
 
     <div class="rec-banner">
       <div class="rec-icon">🏆</div>
       <div>
-        <div class="rec-label">Our recommendation</div>
-        <div class="rec-title">${recTitle}</div>
-        <div class="rec-body">${recBody}</div>
+        <div class="rec-lbl">Recommendation</div>
+        <div class="rec-title">${rec==='fall'?'Buy in Fall 2026 — September to November':'Buy in Spring 2026 — March to May'}</div>
+        <div class="rec-body">${rec==='fall'
+          ?`Fall is the most buyer-friendly window in Sammamish. Fewer competing offers, sellers motivated to close before year-end, and you keep your contingencies. Homes that sat unsold since summer often see price reductions by mid-October — that is your negotiating window.`
+          :`Spring is giving a better opportunity this cycle. More inventory is hitting the market and competition is softer than recent years. You will have more homes to choose from in your $1.25M–$2.0M range.`}</div>
       </div>
     </div>
 
-    <div class="section-heading">Current market snapshot</div>
+    <div class="sec">Current market snapshot — Single Family Residential</div>
     <div class="metrics-grid">
       <div class="mc">
-        <div class="mc-label">Median price</div>
+        <div class="mc-lbl">Median SFR price</div>
         <div class="mc-val">${fmtM(d.median_price)}</div>
-        <div class="mc-delta ${d.yoy_pct > 0 ? 'up' : 'dn'}">${d.yoy_pct > 0 ? '↑' : '↓'} ${Math.abs(d.yoy_pct || 0).toFixed(1)}% YoY</div>
+        <div class="mc-delta ${(d.yoy_pct||0)>0?'up':'dn'}">${(d.yoy_pct||0)>0?'↑':'↓'} ${Math.abs(d.yoy_pct||0).toFixed(1)}% YoY</div>
       </div>
       <div class="mc">
-        <div class="mc-label">Inventory</div>
-        <div class="mc-val">${(d.months_inventory || 0).toFixed(1)} <span style="font-size:14px;color:var(--ink3)">mo</span></div>
-        <div class="mc-delta neu">${d.months_inventory <= 1.5 ? 'Tight — seller mkt' : d.months_inventory <= 3 ? 'Balanced' : 'Buyer-favorable'}</div>
+        <div class="mc-lbl">Month over month</div>
+        <div class="mc-val" style="font-size:17px">${d.mom_pct!=null?(d.mom_pct>0?'+':'')+d.mom_pct+'%':'–'}</div>
+        <div class="mc-delta neu">vs 4 weeks ago</div>
       </div>
       <div class="mc">
-        <div class="mc-label">Days to pending</div>
-        <div class="mc-val">${d.avg_dom || '–'} <span style="font-size:14px;color:var(--ink3)">days</span></div>
-        <div class="mc-delta neu">${d.avg_dom <= 7 ? 'Extremely fast' : d.avg_dom <= 14 ? 'Very fast' : d.avg_dom <= 21 ? 'Moderate' : 'Slower pace'}</div>
+        <div class="mc-lbl">Inventory</div>
+        <div class="mc-val">${(d.months_inventory||0).toFixed(1)}<span style="font-size:13px;color:var(--ink3)"> mo</span></div>
+        <div class="mc-delta neu">${(d.months_inventory||0)<=1.5?'Tight — seller mkt':(d.months_inventory||0)<=3?'Balanced':'Buyer-lean'}</div>
       </div>
       <div class="mc">
-        <div class="mc-label">Over asking</div>
-        <div class="mc-val">${d.pct_sold_above_list || '–'}<span style="font-size:14px;color:var(--ink3)">%</span></div>
-        <div class="mc-delta ${(d.pct_sold_above_list || 0) > 50 ? 'up' : 'neu'}">of homes</div>
+        <div class="mc-lbl">Days to pending</div>
+        <div class="mc-val">${d.avg_dom||'–'}<span style="font-size:13px;color:var(--ink3)"> days</span></div>
+        <div class="mc-delta neu">${(d.avg_dom||0)<=7?'Extremely fast':(d.avg_dom||0)<=14?'Very fast':(d.avg_dom||0)<=21?'Moderate':'Slower pace'}</div>
+      </div>
+      <div class="mc">
+        <div class="mc-lbl">Sold over asking</div>
+        <div class="mc-val">${d.pct_sold_above_list||'–'}<span style="font-size:13px;color:var(--ink3)">%</span></div>
+        <div class="mc-delta ${(d.pct_sold_above_list||0)>50?'up':'neu'}">of homes</div>
+      </div>
+      <div class="mc">
+        <div class="mc-lbl">New listings</div>
+        <div class="mc-val">${d.new_listings||'–'}</div>
+        <div class="mc-delta neu">this week</div>
       </div>
     </div>
 
+    ${predMsg?`
+    <div class="sec">Fall 2026 price forecast</div>
+    <div class="pred-box ${predClass}">
+      <div class="pred-icon">${predIcon}</div>
+      <div class="pred-body">
+        <div class="pred-price">Predicted fall 2026 median: ${fmtM(fall_pred)}</div>
+        ${predMsg}
+        ${spring_pred?`<div style="margin-top:6px;font-size:12px;color:var(--ink3)">Spring 2026 predicted median: ${fmtM(spring_pred)} &nbsp;·&nbsp; Fall saves you roughly ${fmtM(Math.max(0,spring_pred-fall_pred))} vs spring on price alone, before negotiating.</div>`:''}
+      </div>
+    </div>`:''}
+
+    <div class="sec">Price trend + Fall 2026 forecast</div>
     <div class="card">
-      <div class="card-title">12-month price trend</div>
-      <div class="card-sub">Sammamish / Skyline HS area · All SF + condo · Zip 98075</div>
-      <div style="position:relative;width:100%;height:220px">
-        <canvas id="priceChart" role="img" aria-label="Line chart of 12-month median sale price trend for zip 98075 Sammamish near Skyline HS"></canvas>
+      <div class="card-title">12-month history + model forecast to Dec 2026</div>
+      <div class="card-sub">SFR median sale price · zip 98075 · dotted = model projection · shaded = your target windows</div>
+      <div style="position:relative;width:100%;height:240px">
+        <canvas id="priceChart" role="img" aria-label="Price trend and forecast chart for Sammamish SFR zip 98075 through Dec 2026"></canvas>
       </div>
       <div class="legend-row">
-        <span class="leg"><span class="leg-dot" style="background:#c8790a"></span>Median sale price</span>
-        <span class="leg"><span class="leg-box" style="background:rgba(200,121,10,.15)"></span>Spring window</span>
-        <span class="leg"><span class="leg-box" style="background:rgba(26,122,74,.15)"></span>Fall window (target)</span>
+        <span class="leg"><span class="leg-line" style="background:#c8790a"></span>Actual prices</span>
+        <span class="leg"><span class="leg-dash"></span>Forecast (model)</span>
+        <span class="leg"><span class="leg-box" style="background:rgba(200,121,10,.18)"></span>Spring window</span>
+        <span class="leg"><span class="leg-box" style="background:rgba(26,122,74,.18)"></span>Fall target window</span>
+        <span class="leg"><span class="leg-line" style="background:#e2e5f0;height:2px;border-top:2px dashed #c8790a"></span>$1.25M–$2.0M range</span>
       </div>
     </div>
 
-    <div class="section-heading">Spring vs Fall 2026 — head to head</div>
+    <div class="sec">Spring vs Fall 2026 — head to head</div>
     <div class="compare-grid">
-      ${rec === 'fall' ? fallCard + springCard : springCard + fallCard}
+      ${buildSeasonCard('fall','Fall 2026 — Sep to Nov',d.fall_2026_score,rec==='fall',[
+        {t:'g',v:'Fewer competing offers — often 0 to 1'},
+        {t:'g',v:'Homes sitting since summer may cut price'},
+        {t:'g',v:'Inspection and financing contingencies accepted'},
+        {t:'g',v:'Sellers motivated to close before year-end'},
+        {t:'b',v:'Less inventory — fewer homes to choose from'},
+        {t:'n',v:'Rate uncertainty — watch Fed signals'},
+      ])}
+      ${buildSeasonCard('spring','Spring 2026 — Mar to May',d.spring_2026_score,rec==='spring',[
+        {t:'g',v:'Most listings hit the market — best selection'},
+        {t:'g',v:'Easier to compare homes side by side'},
+        {t:'b',v:'Bidding wars on nearly every desirable home'},
+        {t:'b',v:'Expect 3 to 6% over asking price'},
+        {t:'b',v:'Waived contingencies become the norm'},
+        {t:'n',v:'Faster closes due to competition pressure'},
+      ])}
     </div>
 
     <div class="two-col">
@@ -375,187 +270,144 @@ function render(d) {
         <div class="card-title">Seasonal buyer scores</div>
         <div class="card-sub">10 = best conditions for a buyer</div>
         <div class="seasonal-grid">
-          ${['spring','summer','fall','winter'].map(s => {
-            const v = ss[s] || { score: 5, label: '', note: '' };
-            const isRec = s === rec;
-            return `<div class="sc ${sClass(v.score)} ${isRec ? 'active-rec' : ''}">
-              ${isRec ? '<div class="sc-rec-tag">✓ target</div>' : ''}
-              <div class="sc-name">${s[0].toUpperCase() + s.slice(1)}</div>
-              <div class="sc-score">${v.score}/10</div>
+          ${['spring','summer','fall','winter'].map(s=>{
+            const v=ss[s]||{score:5,label:'',note:''};
+            const isR=s===rec;
+            return`<div class="sc ${sClass(v.score)} ${isR?'rec-sc':''}">
+              ${isR?'<div class="sc-tag">✓ target</div>':''}
+              <div class="sc-name">${s[0].toUpperCase()+s.slice(1)}</div>
+              <div class="sc-num">${v.score}/10</div>
               <div class="sc-note">${v.label}</div>
             </div>`;
           }).join('')}
         </div>
       </div>
-
       <div class="card" style="margin-bottom:0">
-        <div class="card-title">${rec[0].toUpperCase() + rec.slice(1)} 2026 score</div>
-        <div class="card-sub">buyer conditions index</div>
-        <div class="score-big" style="color:${scoreColor(d[rec + '_2026_score'] || 5)}">${d[rec + '_2026_score'] || '–'}/10</div>
-        <div class="bar-wrap"><div class="bar" style="width:${(d[rec + '_2026_score'] || 0) * 10}%;background:${scoreColor(d[rec + '_2026_score'] || 5)}"></div></div>
-        <div class="score-label">${rec === 'fall' ? 'Good conditions — fewer offers, negotiating room' : 'Reasonable window — better than recent spring cycles'}</div>
+        <div class="card-title">Your price target range</div>
+        <div class="card-sub">$1.25M – $2.0M · SFR · Skyline HS zone</div>
+        <div style="font-size:13px;color:var(--ink2);line-height:1.7;margin-top:4px">
+          ${d.median_price?`Current SFR median is <strong>${fmtM(d.median_price)}</strong> — ${d.median_price<1250000?'below your range, suggesting strong availability':'within your $1.25M–$2.0M target'}.`:''}
+          ${fall_pred?`<br><br>Fall 2026 model predicts <strong>${fmtM(fall_pred)}</strong> — ${fall_pred<=2000000?'comfortably within your budget ceiling':'approaching your upper limit, factor this in when setting your offer ceiling'}.`:''}
+          <br><br>Homes in the 2,400–3,200 sqft range near Skyline typically list between $1.35M–$1.85M today. Your $2.0M ceiling gives you negotiating room.
+        </div>
       </div>
     </div>
 
-    <div class="section-heading" style="margin-top:28px">Your action plan</div>
+    <div class="sec" style="margin-top:24px">Action plan — buying Fall 2026</div>
     <div class="card">
       <div class="timeline">
         ${[
-          { when: 'Now — Apr 2025', dot: false, what: `<strong>Set up saved searches.</strong> Redfin and Zillow for Skyline HS zone, 4BR, $1.2M–$1.8M. Watch for at least 3 months so you develop a feel for pricing velocity and which streets/subdivisions sell fastest.` },
-          { when: 'Jul – Sep 2025', dot: false, what: `<strong>Choose a buyer's agent.</strong> Interview 2–3 who specialize in Sammamish. Ask specifically: "How many Skyline HS zone transactions in the last 12 months?" A good agent will know which pockets command school premiums.` },
-          { when: 'Jan – Mar 2026', dot: false, what: `<strong>Get fully pre-approved</strong> (not just pre-qualified). Lock your max budget with a local lender. Watch spring 2026 comps carefully — they set the pricing baseline for your fall negotiations.` },
-          { when: rec === 'fall' ? 'Sep 2026' : 'Mar 2026', dot: true, what: rec === 'fall'
-            ? `<strong>Go time.</strong> Move fast on new listings in the first 7 days. Be patient on anything sitting past 3 weeks — those sellers are open to negotiation. Target homes listed in late August that haven't closed. Ask for inspection contingency and closing cost credits on stale listings.`
-            : `<strong>Go time.</strong> Be ready to move within 48 hours of a listing you like. Have your pre-approval letter updated. Spring 2026 inventory is your friend — if one home doesn't work, the next one is coming. Don't let FOMO push you over budget.`
-          }
-        ].map(t => `
+          {when:'Now — Apr 2025',go:false,what:`<strong>Set saved searches.</strong> Redfin and Zillow for Skyline HS zone, 4BR, $1.25M–$2.0M, SFR only. Watch for 3+ months to calibrate your feel for pricing and which streets move fastest.`},
+          {when:'Jul – Sep 2025',go:false,what:`<strong>Choose a buyer's agent</strong> who specializes in Sammamish. Ask: "How many Skyline HS zone SFR transactions in the last 12 months?" A good agent tracks specific subdivisions.`},
+          {when:'Jan – Mar 2026',go:false,what:`<strong>Get fully pre-approved.</strong> Lock your max budget with a local lender. Watch spring 2026 comps closely — they set the pricing baseline for your fall negotiations.`},
+          {when:'Sep – Nov 2026',go:true,what:`<strong>Go time.</strong> Move fast on new listings in the first 7 days. Be patient on anything sitting past 3 weeks — ask for inspection contingency and closing cost credits. Target homes listed in late August that did not close.`},
+        ].map(t=>`
           <div class="tl-item">
-            <div class="tl-left">
-              <div class="tl-dot ${t.dot ? 'future' : ''}"></div>
-              <div class="tl-line"></div>
-            </div>
-            <div class="tl-right">
-              <div class="tl-when">${t.when}</div>
-              <div class="tl-what">${t.what}</div>
-            </div>
-          </div>
-        `).join('')}
+            <div class="tl-left"><div class="tl-dot ${t.go?'go':''}"></div><div class="tl-line"></div></div>
+            <div class="tl-right"><div class="tl-when">${t.when}</div><div class="tl-what">${t.what}</div></div>
+          </div>`).join('')}
       </div>
     </div>
 
     <div class="footer">
-      Data source: ${d.data_source} · Updated automatically every Monday via GitHub Actions ·
+      Data: ${d.data_source||'Zillow Research'} · Updated every Monday via GitHub Actions ·
       <a href="https://www.redfin.com/city/17827/WA/Sammamish/housing-market" target="_blank">Redfin Sammamish</a> ·
       <a href="https://www.zillow.com/sammamish-wa/home-values/" target="_blank">Zillow</a> ·
-      <a href="https://www.nwmls.com" target="_blank">NWMLS</a><br>
-      ${d.criteria} · Not a licensed appraisal · Verify with a local agent before making offers.
+      <a href="https://www.zillow.com/research/data/" target="_blank">Zillow Research Data</a><br>
+      ${d.criteria||''} · Forecast is a statistical model, not a guarantee · Verify with a licensed agent before making offers.
     </div>
   `;
 
-  app.style.display = 'block';
-  buildChart(d);
+  app.style.display='block';
+  buildChart(fp);
 }
 
-function buildSeasonCard(id, name, score, info, isWinner, factors) {
-  const fHtml = factors.map(f => `
-    <li class="factor">
-      <div class="fi fi-${f.t}">${f.t === 'good' ? '+' : f.t === 'bad' ? '−' : '~'}</div>
-      ${f.v}
-    </li>
-  `).join('');
-  return `
-    <div class="season-card ${isWinner ? 'winner' : ''}">
-      ${isWinner ? '<div class="winner-badge">✓ recommended</div>' : ''}
-      <div class="sc-season">Option ${id === 'fall' ? 'B' : 'A'}</div>
-      <div class="sc-name2">${name}</div>
-      <div class="sc-score-row">
-        <div class="sc-score2" style="color:${scoreColor(score)}">${score}</div>
-        <div style="font-size:12px;color:var(--ink3)">/10 buyer score</div>
-      </div>
-      <div class="bar-wrap"><div class="bar" style="width:${score * 10}%;background:${scoreColor(score)}"></div></div>
-      <ul class="factor-list">${fHtml}</ul>
+function buildSeasonCard(id,name,score,isWinner,factors){
+  return`<div class="season-card ${isWinner?'winner-card':''}">
+    ${isWinner?'<div class="winner-badge">✓ recommended</div>':''}
+    <div class="sc-season">Option ${id==='fall'?'B':'A'}</div>
+    <div class="sc-name2">${name}</div>
+    <div class="sc-score-row">
+      <div class="sc-big" style="color:${scoreColor(score)}">${score}</div>
+      <div style="font-size:12px;color:var(--ink3)">/10 buyer score</div>
     </div>
-  `;
+    <div class="bar-wrap"><div class="bar" style="width:${score*10}%;background:${scoreColor(score)}"></div></div>
+    <ul class="factor-list">
+      ${factors.map(f=>`<li class="factor"><div class="fi fi-${f.t}">${f.t==='g'?'+':f.t==='b'?'−':'~'}</div>${f.v}</li>`).join('')}
+    </ul>
+  </div>`;
 }
 
-function buildChart(d) {
-  const ctx = document.getElementById('priceChart');
-  if (!ctx) return;
-  if (priceChart) priceChart.destroy();
+function buildChart(fp){
+  const ctx=document.getElementById('priceChart');
+  if(!ctx||!fp.length) return;
+  if(priceChart) priceChart.destroy();
 
-  const mp = d.monthly_prices || [];
-  const labels = mp.map(p => p.month);
-  const prices = mp.map(p => p.price);
-  if (!prices.length) return;
+  const labels  = fp.map(p=>p.month);
+  const actuals = fp.map(p=>p.type==='actual'?p.price:null);
+  const forecst = fp.map((p,i)=>{
+    if(p.type==='forecast') return p.price;
+    // bridge: include last actual point so line connects
+    if(i>0 && fp[i+1]&&fp[i+1].type==='forecast') return p.price;
+    return null;
+  });
 
-  const mn = Math.min(...prices) * 0.974;
-  const mx = Math.max(...prices) * 1.02;
+  // spring 2026 highlight: Mar/Apr/May 26
+  const springH = fp.map(p=>(['Mar \'26','Apr \'26','May \'26'].includes(p.month))?p.price:null);
+  // fall 2026 highlight: Sep/Oct/Nov 26
+  const fallH   = fp.map(p=>(['Sep \'26','Oct \'26','Nov \'26'].includes(p.month))?p.price:null);
 
-  // highlight spring (roughly index 1-3 = May-Jul) and fall (index 5-8 = Sep-Dec)
-  const springHighlight = prices.map((v, i) => (i >= 1 && i <= 3) ? v : null);
-  const fallHighlight   = prices.map((v, i) => (i >= 5 && i <= 8) ? v : null);
+  const prices  = fp.map(p=>p.price).filter(Boolean);
+  const mn = Math.min(1250000,...prices)*0.975;
+  const mx = Math.max(2000000,...prices)*1.02;
 
-  priceChart = new Chart(ctx, {
-    type: 'line',
-    data: {
+  priceChart=new Chart(ctx,{
+    type:'line',
+    data:{
       labels,
-      datasets: [
-        {
-          label: 'Median price',
-          data: prices,
-          borderColor: '#c8790a',
-          backgroundColor: 'rgba(200,121,10,0.05)',
-          borderWidth: 2.5,
-          pointRadius: 4,
-          pointBackgroundColor: '#c8790a',
-          fill: true,
-          tension: 0.38,
-          order: 1
-        },
-        {
-          label: 'Spring window',
-          data: springHighlight,
-          borderColor: 'transparent',
-          backgroundColor: 'rgba(200,121,10,0.18)',
-          borderWidth: 0,
-          pointRadius: 0,
-          fill: true,
-          tension: 0.38,
-          order: 2
-        },
-        {
-          label: 'Fall window',
-          data: fallHighlight,
-          borderColor: 'transparent',
-          backgroundColor: 'rgba(26,122,74,0.18)',
-          borderWidth: 0,
-          pointRadius: 0,
-          fill: true,
-          tension: 0.38,
-          order: 2
-        }
+      datasets:[
+        {label:'Actual',data:actuals,borderColor:'#c8790a',backgroundColor:'rgba(200,121,10,0.05)',borderWidth:2.5,pointRadius:3.5,pointBackgroundColor:'#c8790a',fill:true,tension:0.38,order:1},
+        {label:'Forecast',data:forecst,borderColor:'#5b3fa0',backgroundColor:'transparent',borderWidth:2,borderDash:[6,4],pointRadius:0,fill:false,tension:0.38,order:1},
+        {label:'Spring window',data:springH,borderColor:'transparent',backgroundColor:'rgba(200,121,10,0.15)',borderWidth:0,pointRadius:0,fill:true,tension:0.38,order:2},
+        {label:'Fall window',data:fallH,borderColor:'transparent',backgroundColor:'rgba(26,122,74,0.18)',borderWidth:0,pointRadius:0,fill:true,tension:0.38,order:2},
       ]
     },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: {
-        legend: { display: false },
-        tooltip: {
-          filter: item => item.datasetIndex === 0,
-          callbacks: { label: c => '  ' + fmtM(c.parsed.y) }
-        }
-      },
-      scales: {
-        y: {
-          min: mn, max: mx,
-          ticks: { callback: v => fmt(v), font: { size: 10 } },
-          grid: { color: 'rgba(0,0,0,.04)' }
+    options:{
+      responsive:true,maintainAspectRatio:false,
+      plugins:{
+        legend:{display:false},
+        tooltip:{
+          filter:i=>i.datasetIndex<=1&&i.parsed.y!==null,
+          callbacks:{label:c=>c.datasetIndex===0?'  Actual: '+fmtM(c.parsed.y):'  Forecast: '+fmtM(c.parsed.y)}
         },
-        x: {
-          ticks: { font: { size: 9 }, maxRotation: 40, autoSkip: false },
-          grid: { display: false }
+        annotation:{} // placeholder
+      },
+      scales:{
+        y:{
+          min:mn,max:mx,
+          ticks:{callback:v=>fmt(v),font:{size:10}},
+          grid:{color:'rgba(0,0,0,.04)'}
+        },
+        x:{
+          ticks:{font:{size:9},maxRotation:45,autoSkip:true,maxTicksLimit:16},
+          grid:{display:false}
         }
       }
     }
   });
 }
 
-// Load data.json from same origin
-fetch('data.json?v=' + Date.now())
-  .then(r => {
-    if (!r.ok) throw new Error('HTTP ' + r.status);
-    return r.json();
-  })
-  .then(data => {
-    document.getElementById('loading').style.display = 'none';
+fetch('data.json?v='+Date.now())
+  .then(r=>{if(!r.ok)throw new Error('HTTP '+r.status);return r.json();})
+  .then(data=>{
+    document.getElementById('loading').style.display='none';
     render(data);
   })
-  .catch(err => {
-    document.getElementById('loading').style.display = 'none';
-    const el = document.getElementById('error-msg');
-    el.style.display = 'block';
-    el.textContent = 'Could not load data.json — ' + err.message + '. Make sure the file exists in the same folder as index.html.';
+  .catch(err=>{
+    document.getElementById('loading').style.display='none';
+    const e=document.getElementById('errBox');
+    e.style.display='block';
+    e.textContent='Could not load data.json — '+err.message;
   });
 </script>
 </body>
