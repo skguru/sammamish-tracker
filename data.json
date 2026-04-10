@@ -9,8 +9,8 @@
   "mom_pct": -0.33,
   "months_inventory": null,
   "avg_dom": null,
-  "list_to_sale": null,
-  "pct_sold_above_list": null,
+  "list_to_sale": 101.3,
+  "pct_sold_above_list": 29.6,
   "new_listings": null,
   "monthly_prices": [
     {
@@ -220,6 +220,6 @@
   "fall_2026_score": 6,
   "spring_2026_score": 3,
   "recommended_season": "fall",
-  "data_source": "Zillow ZHVI (zip 98075) + Seattle metro indicators \u2014 ZHVI zip 98075",
+  "data_source": "Zillow ZHVI zip 98075 + Seattle metro indicators",
   "criteria": "4BR \u00b7 2,400\u20133,200 sqft \u00b7 $1.25M\u20132.0M \u00b7 SFR \u00b7 Skyline HS"
 }
