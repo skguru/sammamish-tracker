@@ -2,21 +2,199 @@
   "updated_at": "April 10, 2026",
   "zip": "98075",
   "city": "Sammamish, WA",
-  "home_type": "Single Family + Condo (Sammamish city-level)",
+  "home_type": "Single Family Residential",
   "price_range": "$1.25M \u2013 $2.0M",
-  "median_price": null,
-  "yoy_pct": null,
-  "mom_pct": null,
+  "median_price": 1810588,
+  "yoy_pct": -3.2,
+  "mom_pct": -0.33,
   "months_inventory": null,
   "avg_dom": null,
   "list_to_sale": null,
   "pct_sold_above_list": null,
-  "new_listings": 8,
-  "monthly_prices": [],
-  "price_with_forecast": [],
-  "fall_2026_predicted_price": null,
-  "spring_2026_predicted_price": null,
-  "fall_price_delta_pct": null,
+  "new_listings": null,
+  "monthly_prices": [
+    {
+      "month": "Jan '25",
+      "value": 1863301.03
+    },
+    {
+      "month": "Feb '25",
+      "value": 1869492.4
+    },
+    {
+      "month": "Mar '25",
+      "value": 1872814.47
+    },
+    {
+      "month": "Apr '25",
+      "value": 1873074.67
+    },
+    {
+      "month": "May '25",
+      "value": 1865981.21
+    },
+    {
+      "month": "Jun '25",
+      "value": 1854150.03
+    },
+    {
+      "month": "Jul '25",
+      "value": 1838071.45
+    },
+    {
+      "month": "Aug '25",
+      "value": 1826337.56
+    },
+    {
+      "month": "Sep '25",
+      "value": 1820246.2
+    },
+    {
+      "month": "Oct '25",
+      "value": 1820046.76
+    },
+    {
+      "month": "Nov '25",
+      "value": 1821246.83
+    },
+    {
+      "month": "Dec '25",
+      "value": 1819496.03
+    },
+    {
+      "month": "Jan '26",
+      "value": 1816502.05
+    },
+    {
+      "month": "Feb '26",
+      "value": 1810588.48
+    }
+  ],
+  "price_with_forecast": [
+    {
+      "month": "Jan '25",
+      "price": 1863301,
+      "type": "actual"
+    },
+    {
+      "month": "Feb '25",
+      "price": 1869492,
+      "type": "actual"
+    },
+    {
+      "month": "Mar '25",
+      "price": 1872814,
+      "type": "actual"
+    },
+    {
+      "month": "Apr '25",
+      "price": 1873075,
+      "type": "actual"
+    },
+    {
+      "month": "May '25",
+      "price": 1865981,
+      "type": "actual"
+    },
+    {
+      "month": "Jun '25",
+      "price": 1854150,
+      "type": "actual"
+    },
+    {
+      "month": "Jul '25",
+      "price": 1838071,
+      "type": "actual"
+    },
+    {
+      "month": "Aug '25",
+      "price": 1826338,
+      "type": "actual"
+    },
+    {
+      "month": "Sep '25",
+      "price": 1820246,
+      "type": "actual"
+    },
+    {
+      "month": "Oct '25",
+      "price": 1820047,
+      "type": "actual"
+    },
+    {
+      "month": "Nov '25",
+      "price": 1821247,
+      "type": "actual"
+    },
+    {
+      "month": "Dec '25",
+      "price": 1819496,
+      "type": "actual"
+    },
+    {
+      "month": "Jan '26",
+      "price": 1816502,
+      "type": "actual"
+    },
+    {
+      "month": "Feb '26",
+      "price": 1810588,
+      "type": "actual"
+    },
+    {
+      "month": "Mar '26",
+      "price": 1852912,
+      "type": "forecast"
+    },
+    {
+      "month": "Apr '26",
+      "price": 1896985,
+      "type": "forecast"
+    },
+    {
+      "month": "May '26",
+      "price": 1940962,
+      "type": "forecast"
+    },
+    {
+      "month": "Jun '26",
+      "price": 1920520,
+      "type": "forecast"
+    },
+    {
+      "month": "Jul '26",
+      "price": 1890939,
+      "type": "forecast"
+    },
+    {
+      "month": "Aug '26",
+      "price": 1852250,
+      "type": "forecast"
+    },
+    {
+      "month": "Sep '26",
+      "price": 1813641,
+      "type": "forecast"
+    },
+    {
+      "month": "Oct '26",
+      "price": 1784263,
+      "type": "forecast"
+    },
+    {
+      "month": "Nov '26",
+      "price": 1758600,
+      "type": "forecast"
+    },
+    {
+      "month": "Dec '26",
+      "price": 1734817,
+      "type": "forecast"
+    }
+  ],
+  "fall_2026_predicted_price": 1785501,
+  "spring_2026_predicted_price": 1896953,
+  "fall_price_delta_pct": -1.4,
   "seasonal_scores": {
     "spring": {
       "score": 3,
@@ -30,7 +208,7 @@
     },
     "fall": {
       "score": 6,
-      "label": "Balanced / buyer-lean",
+      "label": "Balanced/buyer-lean",
       "note": "Less competition"
     },
     "winter": {
@@ -42,6 +220,6 @@
   "fall_2026_score": 6,
   "spring_2026_score": 3,
   "recommended_season": "fall",
-  "data_source": "Zillow Research \u2014 City-level \u2014 Sammamish WA",
-  "criteria": "4BR \u00b7 2,400\u20133,200 sqft \u00b7 $1.25M\u20132.0M \u00b7 Skyline HS \u00b7 Zip 98075"
+  "data_source": "Zillow ZHVI (zip 98075) + Seattle metro indicators \u2014 ZHVI zip 98075",
+  "criteria": "4BR \u00b7 2,400\u20133,200 sqft \u00b7 $1.25M\u20132.0M \u00b7 SFR \u00b7 Skyline HS"
 }
