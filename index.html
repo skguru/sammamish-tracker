@@ -309,6 +309,60 @@ function render(d){
       </div>
     </div>
 
+    <div class="sec" style="margin-top:24px">Live listings — open in Redfin or Zillow</div>
+    <div class="card" style="margin-bottom:14px">
+      <div class="card-title">Current listings matching your criteria</div>
+      <div class="card-sub">4BR · 2,400–3,200 sqft · $1.25M–$2.0M · SFR · Zip 98075 · Skyline HS area</div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px">
+        <a href="https://www.redfin.com/zipcode/98075/filter/min-beds=4,max-beds=4,min-price=1250000,max-price=2000000,min-sqft=2400,max-sqft=3200,property-type=house" target="_blank" style="text-decoration:none">
+          <div style="background:#d63838;color:#fff;border-radius:10px;padding:16px 18px;display:flex;align-items:center;gap:12px;transition:opacity .15s" onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">
+            <div style="font-size:20px">🏠</div>
+            <div>
+              <div style="font-size:14px;font-weight:500;margin-bottom:2px">Search on Redfin</div>
+              <div style="font-size:11px;opacity:.85;font-family:'DM Mono',monospace">Updated every 15–30 min</div>
+            </div>
+            <div style="margin-left:auto;font-size:16px">↗</div>
+          </div>
+        </a>
+        <a href="https://www.zillow.com/homes/for_sale/98075_rb/4-_beds/1250000-2000000_price/2400-3200_sqft/house_type/" target="_blank" style="text-decoration:none">
+          <div style="background:#006aff;color:#fff;border-radius:10px;padding:16px 18px;display:flex;align-items:center;gap:12px;transition:opacity .15s" onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">
+            <div style="font-size:20px">🔵</div>
+            <div>
+              <div style="font-size:14px;font-weight:500;margin-bottom:2px">Search on Zillow</div>
+              <div style="font-size:11px;opacity:.85;font-family:'DM Mono',monospace">Updated daily</div>
+            </div>
+            <div style="margin-left:auto;font-size:16px">↗</div>
+          </div>
+        </a>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:14px">
+        <a href="https://www.redfin.com/zipcode/98075/filter/min-beds=4,max-beds=4,min-price=1250000,max-price=2000000,min-sqft=2400,max-sqft=3200,property-type=house,time-on-market=1w" target="_blank" style="text-decoration:none">
+          <div style="background:var(--amber-bg);border:0.5px solid var(--amber-bd);color:var(--amber);border-radius:8px;padding:10px 12px;font-size:12px;text-align:center;transition:opacity .15s" onmouseover="this.style.opacity='.75'" onmouseout="this.style.opacity='1'">
+            <div style="font-weight:500;margin-bottom:2px">New this week</div>
+            <div style="font-size:10px;opacity:.8;font-family:'DM Mono',monospace">Listed in last 7 days ↗</div>
+          </div>
+        </a>
+        <a href="https://www.redfin.com/zipcode/98075/filter/min-beds=4,max-beds=4,min-price=1250000,max-price=2000000,min-sqft=2400,max-sqft=3200,property-type=house,time-on-market=1m" target="_blank" style="text-decoration:none">
+          <div style="background:var(--green-bg);border:0.5px solid var(--green-bd);color:var(--green);border-radius:8px;padding:10px 12px;font-size:12px;text-align:center;transition:opacity .15s" onmouseover="this.style.opacity='.75'" onmouseout="this.style.opacity='1'">
+            <div style="font-weight:500;margin-bottom:2px">Sitting 30+ days</div>
+            <div style="font-size:10px;opacity:.8;font-family:'DM Mono',monospace">Negotiating room ↗</div>
+          </div>
+        </a>
+        <a href="https://www.redfin.com/zipcode/98075/filter/min-beds=4,max-beds=4,min-price=1250000,max-price=2000000,property-type=house,include=sold-3mo" target="_blank" style="text-decoration:none">
+          <div style="background:var(--blue-bg);border:0.5px solid var(--blue-bd);color:var(--blue);border-radius:8px;padding:10px 12px;font-size:12px;text-align:center;transition:opacity .15s" onmouseover="this.style.opacity='.75'" onmouseout="this.style.opacity='1'">
+            <div style="font-weight:500;margin-bottom:2px">Recent sales</div>
+            <div style="font-size:10px;opacity:.8;font-family:'DM Mono',monospace">Sold last 3 months ↗</div>
+          </div>
+        </a>
+      </div>
+
+      <div style="background:var(--surface);border-radius:8px;padding:12px 14px;font-size:12px;color:var(--ink2);line-height:1.65">
+        <strong style="color:var(--ink)">Buying tip:</strong> "Sitting 30+ days" is your best fall button — homes that haven't sold after 3 weeks are where sellers are most open to price cuts and contingencies. "Recent sales" shows you what actually closed, so you know what to offer.
+      </div>
+    </div>
+
     <div class="footer">
       Data: ${d.data_source||'Zillow Research'} · Updated every Monday via GitHub Actions ·
       <a href="https://www.redfin.com/city/17827/WA/Sammamish/housing-market" target="_blank">Redfin Sammamish</a> ·
