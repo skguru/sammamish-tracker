@@ -2,39 +2,46 @@
   "updated_at": "April 10, 2026",
   "zip": "98075",
   "city": "Sammamish, WA",
+  "home_type": "Single Family Residential",
+  "price_range": "$1.25M \u2013 $2.0M",
   "median_price": null,
   "yoy_pct": null,
+  "mom_pct": null,
   "months_inventory": null,
   "avg_dom": null,
   "list_to_sale": null,
   "pct_sold_above_list": null,
   "new_listings": 8,
   "monthly_prices": [],
+  "price_with_forecast": [],
+  "fall_2026_predicted_price": null,
+  "spring_2026_predicted_price": null,
+  "fall_price_delta_pct": null,
   "seasonal_scores": {
     "spring": {
       "score": 3,
       "label": "Seller market",
-      "note": "Peak competition, bidding wars"
+      "note": "Peak competition"
     },
     "summer": {
       "score": 3,
       "label": "Seller market",
-      "note": "Still very competitive"
+      "note": "Still competitive"
     },
     "fall": {
       "score": 6,
-      "label": "Balanced / buyer-lean",
-      "note": "Less competition, price cuts possible"
+      "label": "Balanced/buyer-lean",
+      "note": "Less competition"
     },
     "winter": {
       "score": 6,
       "label": "Buyer-friendly",
-      "note": "Motivated sellers, low inventory but low demand"
+      "note": "Motivated sellers"
     }
   },
   "fall_2026_score": 6,
   "spring_2026_score": 3,
   "recommended_season": "fall",
-  "data_source": "Zillow Research public CSVs \u2014 zillow.com/research/data",
-  "criteria": "4BR \u00b7 2,400\u20133,200 sqft \u00b7 Zip 98075 \u00b7 Skyline HS area"
+  "data_source": "Zillow Research \u2014 Single Family Residential \u2014 Zip 98075",
+  "criteria": "4BR \u00b7 2,400\u20133,200 sqft \u00b7 SFR only \u00b7 $1.25M\u20132.0M \u00b7 Skyline HS"
 }
