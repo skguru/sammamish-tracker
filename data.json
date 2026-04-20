@@ -1,200 +1,195 @@
 {
-  "updated_at": "April 13, 2026",
+  "updated_at": "April 20, 2026",
   "zip": "98075",
   "city": "Sammamish, WA",
   "home_type": "Single Family Residential",
   "price_range": "$1.25M \u2013 $2.0M",
-  "median_price": 1810588,
-  "yoy_pct": -3.2,
-  "mom_pct": -0.33,
+  "median_price": 1840557,
+  "yoy_pct": -3.8,
+  "mom_pct": -0.5,
   "months_inventory": null,
   "avg_dom": null,
-  "list_to_sale": 101.3,
-  "pct_sold_above_list": 29.6,
+  "list_to_sale": 101.5,
+  "pct_sold_above_list": 33.8,
   "new_listings": null,
   "monthly_prices": [
     {
-      "month": "Jan '25",
-      "value": 1863301.03
-    },
-    {
       "month": "Feb '25",
-      "value": 1869492.4
+      "value": 1909949.41
     },
     {
       "month": "Mar '25",
-      "value": 1872814.47
+      "value": 1913343.37
     },
     {
       "month": "Apr '25",
-      "value": 1873074.67
+      "value": 1913609.2
     },
     {
       "month": "May '25",
-      "value": 1865981.21
+      "value": 1906362.23
     },
     {
       "month": "Jun '25",
-      "value": 1854150.03
+      "value": 1894275.02
     },
     {
       "month": "Jul '25",
-      "value": 1838071.45
+      "value": 1877848.49
     },
     {
       "month": "Aug '25",
-      "value": 1826337.56
+      "value": 1865860.67
     },
     {
       "month": "Sep '25",
-      "value": 1820246.2
+      "value": 1859637.49
     },
     {
       "month": "Oct '25",
-      "value": 1820046.76
+      "value": 1859433.74
     },
     {
       "month": "Nov '25",
-      "value": 1821246.83
+      "value": 1860659.77
     },
     {
       "month": "Dec '25",
-      "value": 1819496.03
+      "value": 1858871.08
     },
     {
       "month": "Jan '26",
-      "value": 1816502.05
+      "value": 1855812.32
     },
     {
       "month": "Feb '26",
-      "value": 1810588.48
+      "value": 1849770.77
+    },
+    {
+      "month": "Mar '26",
+      "value": 1840556.86
     }
   ],
   "price_with_forecast": [
     {
-      "month": "Jan '25",
-      "price": 1863301,
-      "type": "actual"
-    },
-    {
       "month": "Feb '25",
-      "price": 1869492,
+      "price": 1909949,
       "type": "actual"
     },
     {
       "month": "Mar '25",
-      "price": 1872814,
+      "price": 1913343,
       "type": "actual"
     },
     {
       "month": "Apr '25",
-      "price": 1873075,
+      "price": 1913609,
       "type": "actual"
     },
     {
       "month": "May '25",
-      "price": 1865981,
+      "price": 1906362,
       "type": "actual"
     },
     {
       "month": "Jun '25",
-      "price": 1854150,
+      "price": 1894275,
       "type": "actual"
     },
     {
       "month": "Jul '25",
-      "price": 1838071,
+      "price": 1877848,
       "type": "actual"
     },
     {
       "month": "Aug '25",
-      "price": 1826338,
+      "price": 1865861,
       "type": "actual"
     },
     {
       "month": "Sep '25",
-      "price": 1820246,
+      "price": 1859637,
       "type": "actual"
     },
     {
       "month": "Oct '25",
-      "price": 1820047,
+      "price": 1859434,
       "type": "actual"
     },
     {
       "month": "Nov '25",
-      "price": 1821247,
+      "price": 1860660,
       "type": "actual"
     },
     {
       "month": "Dec '25",
-      "price": 1819496,
+      "price": 1858871,
       "type": "actual"
     },
     {
       "month": "Jan '26",
-      "price": 1816502,
+      "price": 1855812,
       "type": "actual"
     },
     {
       "month": "Feb '26",
-      "price": 1810588,
+      "price": 1849771,
       "type": "actual"
     },
     {
       "month": "Mar '26",
-      "price": 1852912,
-      "type": "forecast"
+      "price": 1840557,
+      "type": "actual"
     },
     {
       "month": "Apr '26",
-      "price": 1896985,
+      "price": 1882496,
       "type": "forecast"
     },
     {
       "month": "May '26",
-      "price": 1940962,
+      "price": 1924257,
       "type": "forecast"
     },
     {
       "month": "Jun '26",
-      "price": 1920520,
+      "price": 1902132,
       "type": "forecast"
     },
     {
       "month": "Jul '26",
-      "price": 1890939,
+      "price": 1871006,
       "type": "forecast"
     },
     {
       "month": "Aug '26",
-      "price": 1852250,
+      "price": 1830936,
       "type": "forecast"
     },
     {
       "month": "Sep '26",
-      "price": 1813641,
+      "price": 1791021,
       "type": "forecast"
     },
     {
       "month": "Oct '26",
-      "price": 1784263,
+      "price": 1760288,
       "type": "forecast"
     },
     {
       "month": "Nov '26",
-      "price": 1758600,
+      "price": 1733277,
       "type": "forecast"
     },
     {
       "month": "Dec '26",
-      "price": 1734817,
+      "price": 1708166,
       "type": "forecast"
     }
   ],
-  "fall_2026_predicted_price": 1785501,
-  "spring_2026_predicted_price": 1896953,
-  "fall_price_delta_pct": -1.4,
+  "fall_2026_predicted_price": 1761529,
+  "spring_2026_predicted_price": 1903376,
+  "fall_price_delta_pct": -4.3,
   "seasonal_scores": {
     "spring": {
       "score": 3,
