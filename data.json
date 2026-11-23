@@ -1,5 +1,5 @@
 {
-  "updated_at": "November 16, 2026",
+  "updated_at": "November 23, 2026",
   "zip": "98075",
   "city": "Sammamish, WA",
   "home_type": "Single Family Residential",
@@ -9,8 +9,8 @@
   "mom_pct": -0.76,
   "months_inventory": null,
   "avg_dom": null,
-  "list_to_sale": 101.1,
-  "pct_sold_above_list": 25.3,
+  "list_to_sale": 100.9,
+  "pct_sold_above_list": 19.3,
   "new_listings": null,
   "monthly_prices": [
     {
@@ -162,22 +162,22 @@
       "note": "Peak competition"
     },
     "summer": {
-      "score": 3,
+      "score": 4,
       "label": "Seller market",
       "note": "Still competitive"
     },
     "fall": {
-      "score": 6,
+      "score": 7,
       "label": "Balanced/buyer-lean",
       "note": "Less competition"
     },
     "winter": {
-      "score": 6,
+      "score": 8,
       "label": "Buyer-friendly",
       "note": "Motivated sellers"
     }
   },
-  "fall_2026_score": 6,
+  "fall_2026_score": 7,
   "spring_2026_score": 3,
   "recommended_season": "fall",
   "data_source": "Zillow ZHVI zip 98075 + Seattle metro indicators",
